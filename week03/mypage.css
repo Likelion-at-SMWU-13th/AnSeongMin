@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'YiSunShinDotumM';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@keyframes colorChange { /*도넛에 애니메이션 효과 넣기*/
+    0%   { border-color: #7A96AE; }
+    50%  { border-color: #A1C6EA; }
+    100% { border-color: #7A96AE; }
+  }
+
+body {
+    display: flex;
+    width: 100%; /*전체 화면 너비는 100wh라고 하는듯*/
+    height: 100vh; /*전체 화면 높이*/
+    background-color: white;
+    font-family: "YiSunShinDotumM";
+}
+/*전체 body*/
+#body_left {
+    flex:2.5;
+    display:flex;
+    flex-direction: column;
+    justify-content: center; /*flexbox에서 자식요소들 안의 내용을 세로정렬*/
+    align-items: center; /*flexbox에서 가로정렬*/
+    height:100vh;
+    background-color: #7A96AE;
+    border-radius: 30px;
+    padding: 10px;
+    margin:10px;
+}
+
+#body_right {
+    flex:7.5;
+    height:100vh;
+    background-color: #CBDDE1;
+}
+
+/*왼쪽 아이템들*/
+#name {
+    font-weight: bold;
+    font-size: large;
+    color: #CBDDE1;
+}
+
+article {
+    display: flex;          
+    justify-content: center; 
+    margin-top: 10px;
+  }
+  
+.section_donut { /*각 섹션 전체 body*/
+    display: flex;
+    flex-direction: column;  
+    align-items: center;    
+    justify-content: center;  
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 25px 25px 10px 25px;
+    margin:10px;
+  }
+
+.donut {
+    width: 50px;
+    height: 50px;
+    border: 10px solid #CBDDE1; 
+    border-radius: 50%;
+    background-color: transparent; /* 배경 비우기 */
+    box-sizing: border-box;
+}
+
+.logo_wrapper {
+    display: flex;
+    justify-content: space-between; /*공간에 맞게 꽉차게 로고들 배치하기 위함*/
+    align-items: center;
+    width: 320px;
+    height: auto;
+    margin-bottom: 30px;
+}
+.logo { /*logo 이미지를 중앙에 배치하고 싶다면 부모요소가 flex가 되어야한다*/ 
+    width:55px;
+    height:auto;
+}
+
+/*---------------------------------------------ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ--------------------------------------------------------*/
+/*오른쪽 아이템들*/
+
+

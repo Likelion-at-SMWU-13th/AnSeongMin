@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mypage.css" />
     <title>마이페이지 과제 화면</title>
 </head>
 <body>
     <!-- 왼쪽 div -->
-    <div id="left_body">
-        <img src="./images/숙명여대로고.svg" />
-        <h5>안성민</h5>
+    <div id="body_left">
+        <img src="./images/숙명여대로고.svg" width="200px" height="200px" />
+        <p id="name">안성민</p>
         <ul>
             <li>컴퓨터과학전공 23학번</li>
             <li>03년생 / INTJ</li>
@@ -17,38 +18,39 @@
             <li>깃허브 아이디 : minnnnnnni<br/>(n이 7개)</li>
         </ul>
         <article>
-            <section>
+            <section class="section_donut">
                 <div class="donut"></div>
                 <p>휴학중</p>
             </section>
-            <section>
+            <section class="section_donut">
                 <div class="donut"></div>
                 <p>휴학중</p>
             </section>
-            <section>
+            <section class="section_donut">
                 <div class="donut"></div>
                 <p>휴학중</p>
             </section>
         </article>
-        <h6>소속 집단 및 경력</h6>
-        <div>
-            <img src="./images/숙명여대로고.svg" />
-            <img src="./images/숙멋사로고 1.svg" />
-            <img src="./images/숙명여대로고.svg" />
-            <img src="./images/숙멋사로고 1.svg" />
+        <h4>소속 집단 및 경력</h4>
+        <div class="logo_wrapper">
+            <img src="./images/숙명여대로고.svg" class="logo" />
+            <img src="./images/솔룩스로고.png" class="logo"/>
+            <img src="./images/구름톤유니브로고.png" class="logo"/>
+            <img src="./images/숙멋사로고 1.svg" class="logo"/>
         </div>
         <footer>BE THE QUEEN <br/>RULE YOUR WORLD</footer>
     </div>
 
     <!-- 오른쪽 div -->
-     <div id="right_body">
+     <div id="body_right">
         <header>
             <img src="./images/숙멋사로고 1.svg" />
-            <h4>숙명여대 멋쟁이사자처럼 13기 / 아기사자 / 백엔드</h4>
+            <img src="./images/숙멋사로고명 1.svg" />
+            <h3>숙명여대 멋쟁이사자처럼 13기ㆍ아기사자ㆍ백엔드</h3>
         </header>
         <div>
             <img src="./images/숙멋사로고명 1.svg" />
-            <button type="button">버튼을 클릭</button>
+            <button type="button">모험의 순간</button> <!--클릭하면 '네 멋대로 해' 나옴-->
         </div>
         <span>
             <div class="num">23</div>
