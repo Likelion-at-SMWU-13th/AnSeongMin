@@ -5,15 +5,9 @@
     font-style: normal;
 }
 
-@keyframes colorChange { /*도넛에 애니메이션 효과 넣기*/
-    0%   { border-color: #7A96AE; }
-    50%  { border-color: #A1C6EA; }
-    100% { border-color: #7A96AE; }
-  }
-
 body {
     display: flex;
-    width: 100%; /*전체 화면 너비는 100wh라고 하는듯*/
+    width: 100wh; /*전체 화면 너비*/
     height: 100vh; /*전체 화면 높이*/
     background-color: white;
     font-family: "YiSunShinDotumM";
@@ -26,66 +20,277 @@ body {
     justify-content: center; /*flexbox에서 자식요소들 안의 내용을 세로정렬*/
     align-items: center; /*flexbox에서 가로정렬*/
     height:100vh;
-    background-color: #7A96AE;
+    background-color: #213555;
     border-radius: 30px;
     padding: 10px;
-    margin:10px;
+    margin:5px;
+    margin-right: 10px;
 }
 
 #body_right {
     flex:7.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     height:100vh;
-    background-color: #CBDDE1;
+    background-color: #F5EFE7;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 10px 10px 0;
 }
 
 /*왼쪽 아이템들*/
+#img_profile {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+}
+
 #name {
     font-weight: bold;
     font-size: large;
+    font-size: 20px;
     color: #CBDDE1;
+}
+
+ul {
+    margin-top: 0; /*이름이랑 여백 조절하기 위함. 이거 안하면 너무멀어*/ 
+    color: #e3e3e3;
 }
 
 article {
     display: flex;          
     justify-content: center; 
-    margin-top: 10px;
+    margin-top: 5px;
   }
   
 .section_donut { /*각 섹션 전체 body*/
     display: flex;
     flex-direction: column;  
     align-items: center;    
-    justify-content: center;  
-    background-color: #f0f0f0;
+    justify-content: space-between; 
+    background-color: rgba(240, 240, 240, 0); 
     border-radius: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    padding: 25px 25px 10px 25px;
-    margin:10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    padding: 10px 15px 0px 15px;
+    margin:5px;
+    word-break: keep-all;
   }
 
 .donut {
-    width: 50px;
-    height: 50px;
-    border: 10px solid #CBDDE1; 
+    width: 45px;
+    height: 45px;
+    border: 10px solid #cbcbe1; 
     border-radius: 50%;
-    background-color: transparent; /* 배경 비우기 */
+    background-color: transparent; 
     box-sizing: border-box;
+}
+.section_donut:nth-child(1) .donut {
+    border-color: #cbcbe1;
+  }
+  
+  .section_donut:nth-child(2) .donut {
+    border-color: #bbbbe4;
+  }
+  
+  .section_donut:nth-child(3) .donut {
+    border-color: #a8a8e6; 
+  }
+  
+.section_donut p {
+    color:#CBDDE1;
+}
+
+#body_left h4 {
+    color: #CBDDE1;
+    font-size: 1rem;
+    margin: 23px 0 10px 0;
 }
 
 .logo_wrapper {
     display: flex;
     justify-content: space-between; /*공간에 맞게 꽉차게 로고들 배치하기 위함*/
     align-items: center;
-    width: 320px;
+    width: 280px;
     height: auto;
     margin-bottom: 30px;
 }
 .logo { /*logo 이미지를 중앙에 배치하고 싶다면 부모요소가 flex가 되어야한다*/ 
-    width:55px;
+    width:60px;
     height:auto;
+}
+
+footer {
+    font-weight: bold;
+    color: #cbcbe1;
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 /*---------------------------------------------ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ--------------------------------------------------------*/
 /*오른쪽 아이템들*/
+header {
+    display: flex;    
+    align-items: center;  
+    justify-content: space-between; /*가로로 양끝정렬*/
+    padding: 10px 20px;                  
+    background-color: #D8C4B6;   
+    border-radius: 20px;           
+    margin: 0 25px 10px 25px;          
+    width:950px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+  }
+  
+  #body_right header img {
+    width: 55px;
+    height: auto;
+    margin-left: 5px;
+  }
+  
+  /* h3 스타일 (선택) */
+  #body_right header h2 {
+    font-size: 1.8rem;
+    color: #4c413a;   
+    margin: 0;
+    padding-left: 15px;
+  }
+
+.image-wrapper {
+    position: relative;
+    width: fit-content;
+    display: inline-block;
+}
+  #img_big {
+    width: 980px; /*참고로 header랑 똑같으려면 990이어야 한다*/
+    height: 350px;
+    object-fit: cover; /*이미지 비율은 유지하면서 원하는 크기 안에 맞춰넣기 가능한 속성. 가장자리가 잘리더라도 비율유지하고싶을때*/
+    align-items: center;
+    display:block;
+    justify-content: center;
+
+  }
+.image-caption {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    color: rgb(216, 216, 216);
+}
+/* 안 쓰게 된 부분
+.sm {
+    text-align: right;
+}
+.num {
+    font-weight: bold;
+    color:#0d006c;
+}
+.text {
+    font-weight: bold;
+    color: #4c413a;
+}
+*/
+.title_and_button {
+    display: flex;
+    justify-content: space-between; /*양쪽끝으로 정렬*/
+    align-items: baseline;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#title_small {
+    text-align: left;
+    align-self: flex-start;
+    margin: 10px 0 0px 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #4c413a;       
+}
+.button_group {
+    display:flex;
+    gap:10px;
+}
+button {
+    background-color: #D8C4B6;  
+    color: #66564b;       
+    font-weight: bold;         
+    cursor: pointer;            
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);  
+    font-family: "YiSunShinDotumM";
+  }
+#btn_lion {
+    font-size: 30px;    
+    padding: 10px 20px;          
+    border-radius: 8px;  
+}
+#btn_edit {
+    font-size: 20px;
+    padding: 6px 7px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+
+.section_text {
+    flex:1;
+    display:flex;
+    flex-direction: column;
+    padding:10px;
+    margin:0 5px 5px 5px;
+    border-radius: 10px;
+    width:300px;
+    height:250px;
+}
+
+.section_text:nth-child(1) {
+    background-image: url('./images/아름다운_숙대의_봄.jpg');
+    background-size: cover;           /* 이미지가 요소를 꽉 채우도록 확대/축소 */
+    background-position: center;      /* 중앙 기준으로 위치 */
+    background-repeat: no-repeat;     /* 반복 안 되게 */
+    color: #003087;
+  }
+  
+  .section_text:nth-child(2) {
+    background-image: url('./images/과제.png'); 
+    background-size: cover;         
+    background-position: center;     
+    background-repeat: no-repeat;    
+    color: #e1dfdf;
+  }
+  
+  .section_text:nth-child(3) {
+    background-image: url('./images/숙멋사사진.png');
+    background-size: cover;           
+    background-position: center;      
+    background-repeat: no-repeat;    
+    color: #f0f0f0;
+  }
+
+
+  .section_text h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+.section_text:nth-child(1) h5 {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 2px 6px;
+    margin-right: 187px;
+}
+.section_text:nth-child(2) h5 {
+    background-color: #003c49;
+    border-radius: 10px;
+    padding: 2px 6px;
+    margin-right: 187px;
+}
+
+  
+  .section_text p {
+    flex: 1;       /* 남은 공간 다 차지 */
+    margin: 0;
+  }
+
 
 
