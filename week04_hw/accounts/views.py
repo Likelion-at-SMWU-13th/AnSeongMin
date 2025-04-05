@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 def signup(request):
     if request.method == "POST":
@@ -29,3 +29,12 @@ def login(request):
 
 def main(request):
     return render(request, "main.html")
+
+def logout(request):
+    if request.user.is_authenticated: # 사용자가 로그인 상태면
+        auth_logout(request) # 로그아웃 수행
+        return redirect("login") # login 페이지로 이동
+    
+    # 로그인 상태가 아니라면(일부러 주소창에 /main 입력해서 메인페이지로 가는경우) 로그아웃 요청을 받아도 가만히 있도록 하기
+    else: 
+        return redirect("login")

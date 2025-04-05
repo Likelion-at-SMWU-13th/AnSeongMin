@@ -23,4 +23,5 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('', views.login, name='login'), # ''이라고 되어있는건 기본페이지가 로그인페이지라는 뜻
     path('main/', views.main, name="main"),
+    path('logout/', views.logout, name='logout'),
 ]
