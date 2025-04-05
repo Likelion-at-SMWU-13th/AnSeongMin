@@ -26,3 +26,6 @@ def login(request):
         
     # 인증에 실패하는 경우(None 반환된 경우) or GET 요청 받는경우
     return render(request, "login.html") # 로그인 페이지 렌더링하기
+
+def main(request):
+    return render(request, "main.html")
