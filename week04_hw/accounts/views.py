@@ -38,3 +38,9 @@ def logout(request):
     # 로그인 상태가 아니라면(일부러 주소창에 /main 입력해서 메인페이지로 가는경우) 로그아웃 요청을 받아도 가만히 있도록 하기
     else: 
         return redirect("login")
+    
+def mypage(request):
+    return render(request, "mypage.html")
+
+def edit(request): # 정보수정 버튼 누르면 일단 메인가도록 함
+    return render(request, "main.html")

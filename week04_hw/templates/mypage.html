@@ -1,15 +1,40 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mypage.css" />
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}" />
     <title>마이페이지 과제 화면</title>
+    <style>
+.section_text:nth-child(1) {
+    background-image: url("{% static 'images/아름다운_숙대의_봄.jpg' %}");
+    background-size: cover;           /* 이미지가 요소를 꽉 채우도록 확대/축소 */
+    background-position: center;      
+    background-repeat: no-repeat;     
+    color: #003087;
+  }
+  .section_text:nth-child(2) {
+    background-image: url("{% static 'images/과제.png' %}"); 
+    background-size: cover;         
+    background-position: center;     
+    background-repeat: no-repeat;    
+    color: #e1dfdf;
+  }
+  .section_text:nth-child(3) {
+    background-image: url("{% static 'images/숙멋사사진.png' %}");
+    background-size: cover;           
+    background-position: center;      
+    background-repeat: no-repeat;    
+    color: #f0f0f0;
+  }
+    </style>
 </head>
 <body>
     <!-- 왼쪽 div -->
     <div id="body_left">
-        <img id="img_profile" src="./images/안성민_프로필사진.jpg" />
+        <img id="img_profile" src="{% static 'images/안성민_프로필사진.jpg' %}" />
         <p id="name">안성민</p>
         <ul>
             <li>닉네임 : asmx6</li>
@@ -34,10 +59,10 @@
         </article>
         <h4>활동 히스토리</h4>
         <div class="logo_wrapper">
-            <img src="./images/숙명여대로고.svg" class="logo" />
-            <img src="./images/솔룩스로고.png" class="logo"/>
-            <img src="./images/구름톤유니브로고.png" class="logo"/>
-            <img src="./images/숙멋사로고 1.svg" class="logo"/>
+            <img src="{% static 'images/숙명여대로고.svg' %}" class="logo" />
+            <img src="{% static 'images/솔룩스로고.png' %}" class="logo"/>
+            <img src="{% static 'images/구름톤유니브로고.png' %}" class="logo"/>
+            <img src="{% static 'images/숙멋사로고 1.svg' %}" class="logo"/>
         </div>
         <footer>BE THE QUEEN <br/>RULE YOUR WORLD</footer>
     </div>
@@ -45,12 +70,13 @@
     <!-- 오른쪽 div -->
      <div id="body_right">
         <header>
-            <img src="./images/숙멋사로고 1.svg" />
+            <img src="{% static 'images/숙멋사로고 1.svg' %}" />
             <h2>안성민ㆍ숙명여대 멋쟁이사자처럼 13기ㆍ아기사자ㆍ백엔드</h2>
-            <button id="btn_edit" type="button" onclick="location.href='edit.html'">정보 수정</button><!--클릭하면 정보 수정 페이지로 이동-->
+        <!--    <button id="btn_edit" type="button" onclick="location.href='edit.html'">정보 수정</button> --><!--클릭하면 정보 수정 페이지로 이동-->
+            <a href="{% url 'edit' %}">정보 수정</a>
         </header>
         <div class="image-wrapper">
-            <img id="img_big" src="./images/아름다운_숙대의_여름.jpg" />
+            <img id="img_big" src="{% static 'images/아름다운_숙대의_여름.jpg' %}" />
             <div class="image-caption">2023. 04. 내가 사랑하는 숙명</div>
         </div>
         <div class="sm">

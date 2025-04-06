@@ -242,17 +242,17 @@ button {
     width:300px;
     height:250px;
 }
-
+/*
 .section_text:nth-child(1) {
     background-image: url('./images/아름다운_숙대의_봄.jpg');
-    background-size: cover;           /* 이미지가 요소를 꽉 채우도록 확대/축소 */
-    background-position: center;      /* 중앙 기준으로 위치 */
-    background-repeat: no-repeat;     /* 반복 안 되게 */
+    background-size: cover;         
+    background-position: center;  
+    background-repeat: no-repeat;     
     color: #003087;
   }
   
   .section_text:nth-child(2) {
-    background-image: url('./images/과제.png'); 
+    background-image: url("/week04_hw/static/images/assignment.png"); 
     background-size: cover;         
     background-position: center;     
     background-repeat: no-repeat;    
@@ -266,7 +266,7 @@ button {
     background-repeat: no-repeat;    
     color: #f0f0f0;
   }
-
+*/
 
   .section_text h5 {
     margin: 0;
