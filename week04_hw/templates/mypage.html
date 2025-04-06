@@ -35,14 +35,22 @@
     <!-- 왼쪽 div -->
     <div id="body_left">
         <img id="img_profile" src="{% static 'images/안성민_프로필사진.jpg' %}" />
-        <p id="name">안성민</p>
+        {% if user.is_authenticated %}
+            <p id="name">{{user.first_name}}</p>
+        {% else %}
+            <p id="name">로그인하세요</p>
+        {% endif %}
+        {% if user.is_authenticated %}
         <ul>
-            <li>닉네임 : asmx6</li>
+            <li>닉네임 : {{user.username}}</li>
             <li>학적 : 컴퓨터과학전공 23학번</li>
             <li>나이/MBTI : 03년생 / INTJ</li>
             <li>인스타 아이디 : minnnnnnn_i</li>
             <li>깃허브 아이디 : minnnnnnni<br/>(n이 7개)</li>
         </ul>
+        {% else %}
+            <p></p>
+        {% endif %} 
         <article>
             <section class="section_donut">
                 <div class="donut"></div>
@@ -71,9 +79,14 @@
      <div id="body_right">
         <header>
             <img src="{% static 'images/숙멋사로고 1.svg' %}" />
-            <h2>안성민ㆍ숙명여대 멋쟁이사자처럼 13기ㆍ아기사자ㆍ백엔드</h2>
+            {% if user.is_authenticated %}
+                <h2>{{user.first_name}}ㆍ숙명여대 멋쟁이사자처럼 13기ㆍ아기사자ㆍ백엔드</h2>
         <!--    <button id="btn_edit" type="button" onclick="location.href='edit.html'">정보 수정</button> --><!--클릭하면 정보 수정 페이지로 이동-->
-            <a href="{% url 'edit' %}">정보 수정</a>
+                <a href="{% url 'edit' %}">정보 수정</a> <!--앵커 태그로 바꿈-->
+            {% else %}
+                <h2>로그인을 해주세요</h2>
+                <a href="{% url 'login' %}">로그인하기</a>
+            {% endif %}
         </header>
         <div class="image-wrapper">
             <img id="img_big" src="{% static 'images/아름다운_숙대의_여름.jpg' %}" />
