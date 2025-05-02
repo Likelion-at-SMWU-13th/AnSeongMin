@@ -139,6 +139,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+#myvenv 미친놈
+myvenv/ 
 
 # Spyder project settings
 .spyderproject
@@ -149,6 +151,8 @@ venv.bak/
 
 # mkdocs documentation
 /site
+# 갑자기 생겼길래 새로 추가함; 
+Lib/site-packages/ 
 
 # mypy
 .mypy_cache/
