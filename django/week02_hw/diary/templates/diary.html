@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary</title>
+</head>
+<body>
+    {% for object in object_list %}
+        <h1>{{ object.writer }}의 일기장</h1>
+        <div>
+            <h3>{{ object.created_at }}에 내가 한 일</h3>
+            <h4>{{ object.content }}</h4>
+            <p>조회수 : {{ object.view_count }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>작성된 일기가 없습니다. </p>
+    {% endfor %}
+</body>
+</html>
