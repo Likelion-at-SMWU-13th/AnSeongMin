@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for object in object_list %}
+        <li>{{ object.content }} (조회수: {{ object.view_count }})</li>
+    {% empty %}
+        <li>작성된 일기가 없습니다.</li>
+    {% endfor %}
+</body>
+</html>
