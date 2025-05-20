@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 
-from posts.views_cal import calculator_query
+from posts.views_cal import calculator_query, calculator_body
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls', namespace='posts')),
-    path('calculator/query', calculator_query),
+    path('calculater/query', calculator_query), # 왜 여기 앞에는 calculater/query이지? calculater라는 파일이 없지 않나..? 
+    path('calculater/body', calculator_body), 
 ]
