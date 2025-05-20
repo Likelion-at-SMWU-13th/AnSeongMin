@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-@api_view(['GET'])
+@api_view(['POST'])
 def calculator_query(request):
+    data = request.data 
     num1 = request.GET.get('num1', 0)
     num2 = request.GET.get('num2', 0)
     op = request.GET.get('op')
