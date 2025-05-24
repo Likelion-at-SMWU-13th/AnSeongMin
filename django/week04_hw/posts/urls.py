@@ -10,6 +10,6 @@ router_post = routers.DefaultRouter()
 router_post.register('', PostModelViewSet)
 
 urlpatterns = [
-    path('', include(router_post.urls))
-    path('admin/', admin.site.urls)
+    path('', include(router_post.urls)),
+    path('admin/', admin.site.urls),
 ]
