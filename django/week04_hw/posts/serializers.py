@@ -8,7 +8,7 @@ class PostModelSerializer(ModelSerializer):
         fields = '__all__' # 모든 필드를 직렬화
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
