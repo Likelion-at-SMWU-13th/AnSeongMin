@@ -3,7 +3,7 @@ from django.contrib import admin
 from rest_framework import routers
 
 from .views import PostModelViewSet
-from .views_signup import create_user, get_user, update_user
+from .views_signup import create_user, get_user, update_user, delete_user
 
 app_name = "posts"
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('', create_user),
     path('<int:pk>/', get_user),
     path('<int:pk>/update/', update_user), 
+    path('<int:pk>/delete/', delete_user), 
 ]

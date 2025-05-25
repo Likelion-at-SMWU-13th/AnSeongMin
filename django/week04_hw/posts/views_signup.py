@@ -42,8 +42,18 @@ def update_user(request, pk):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-
 
 
 # 회원 탈퇴 (Delete -> DELETE)
+@api_view(['DELETE'])
+def delete_user(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    user.delete() 
+    return Response(status=status.HTTP_204_NO_CONTENT) # 204: 반환 response가 없지만 요청 성공 
+
+
+
