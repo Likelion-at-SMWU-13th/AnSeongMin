@@ -10,10 +10,10 @@ User = get_user_model()
 @api_view(['POST'])
 def create_user(request):
     serializer = UserModelSerializer(data=request.data) # 요청한 데이터 받기
-    if serializer.is_valid(): # 유효성 검사
-        serializer.save() # 저장 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if serializer.is_valid(): # 유효성 검사 
+        serializer.save() # DB에 객체 생성, 저장 
+        return Response(serializer.data, status=status.HTTP_201_CREATED) # 저장된 결과를 json 응답으로 반환 
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) # 오류가 났다면, 어떤 필드에서 오류가 났는지 JSON으로 반환
 
 
 # 회원정보 조회 (Read -> GET)
@@ -29,6 +29,21 @@ def get_user(request, pk):
     
 
 # 회원정보 수정 (Update -> PUT/PATCH)
+@api_view(['PUT'])
+def update_user(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = UserModelSerializer(instance=user, data=request.data, partial=True)
+
+    if serializer.is_valid(): 
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
 
 
 # 회원 탈퇴 (Delete -> DELETE)
