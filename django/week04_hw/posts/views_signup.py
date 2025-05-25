@@ -2,6 +2,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status # status를 숫자뿐만 아니라 문자(DRF 상수)로도 적을 수 있게 해준다 -> 가독성 굿
 from .serializers import UserModelSerializer
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 # 회원가입 (Create -> POST)
@@ -16,11 +18,15 @@ def create_user(request):
 
 # 회원정보 조회 (Read -> GET)
 @api_view(['GET'])
-def get_user(request):
-    num1 = request.GET.get('num1', 0)
-    num2 = request.GET.get('num2', 0)
-    op = request.GET.get('op')
+def get_user(request, pk):
+    try:
+        user = User.objects.get(pk=pk) # User 모델에서 기본키 pk(변수)가 pk(파라미터로 들어온 실제 값)인 사용자를 가져오려고 시도
+    except User.DoesNotExist: # 없으면 예외처리
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
+    serializer = UserModelSerializer(user) # 찾은 user 객체를 UserModelSerializer를 통해 직렬화
+    return Response(serializer.data, status=status.HTTP_200_OK) # 최종적으로 변환된 json 데이터를 200 코드와 함께 반환
+    
 
 # 회원정보 수정 (Update -> PUT/PATCH)
 

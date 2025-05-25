@@ -18,12 +18,10 @@ from django.contrib import admin
 from django.urls import path, include 
 
 from posts.views_cal import calculator_query, calculator_body 
-from posts.views_signup import create_user 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls', namespace='posts')),
-    path('calculator/query', calculator_query), 
-    path('calculator/body', calculator_body),
-    path('signup/create', create_user), 
+    path('calculator/query/', calculator_query), 
+    path('calculator/body/', calculator_body),
 ]

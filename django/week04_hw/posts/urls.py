@@ -3,6 +3,7 @@ from django.contrib import admin
 from rest_framework import routers
 
 from .views import PostModelViewSet
+from .views_signup import create_user, get_user
 
 app_name = "posts"
 
@@ -10,6 +11,7 @@ router_post = routers.DefaultRouter()
 router_post.register('', PostModelViewSet)
 
 urlpatterns = [
-    path('', include(router_post.urls)),
     path('admin/', admin.site.urls),
+    path('', create_user),
+    path('<int:pk>/', get_user),
 ]

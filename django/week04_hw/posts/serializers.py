@@ -11,4 +11,5 @@ class PostModelSerializer(ModelSerializer):
 class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'username', 'email'] 
+        # 회원가입 기능에 필요한 최소 필드만 직렬화하고 반환할 수 있도록 함
