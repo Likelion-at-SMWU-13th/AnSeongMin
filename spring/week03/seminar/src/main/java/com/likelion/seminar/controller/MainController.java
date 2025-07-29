@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
-    @RequestMapping("/home")
+    @RequestMapping("/home/{color}")
     public String home(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String color,
