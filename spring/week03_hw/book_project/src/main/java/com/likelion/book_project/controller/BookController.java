@@ -5,6 +5,7 @@ import com.likelion.book_project.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,8 +46,8 @@ public class BookController {
             @Parameter(name = "price", description = "도서 가격", required = true)
     })
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "등록 성공"),
-            @ApiResponse(responseCode = "409", description = "중복된 책이 이미 존재함")
+            @ApiResponse(responseCode = "200", description = "책 등록에 성공했습니다.", content= @Content(mediaType="application/json")),
+            @ApiResponse(responseCode = "409", description = "중복된 책이 이미 존재합니다.", content= @Content(mediaType="application/json"))
     })
     @PostMapping("/books")
     public String addBook(

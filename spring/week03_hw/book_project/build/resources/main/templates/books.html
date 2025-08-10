@@ -9,24 +9,24 @@
 </head>
 <body>
 <h1>📚 도서 목록</h1>
-<form action="/books" method="post">
-    제목: <input type="text" name="title"><br/>
-    저자: <input type="text" name="author"><br/>
-    가격: <input type="number" step="any" name="price"><br/>
-    <button type="submit">등록</button>
-</form>
+    <form action="/books" method="post">
+        제목: <input type="text" name="title"><br/>
+        저자: <input type="text" name="author"><br/>
+        가격: <input type="number" step="any" name="price"><br/>
+        <button type="submit">등록</button>
+    </form>
 
 <hr/>
 
 <h2>등록된 도서</h2>
-<ul>
-    <li th:each="book : ${books}">
-        <strong th:text="${book.title}">제목</strong>
-        <span> - </span>
-        <span th:text="${book.author}">저자</span>
-        <span> / </span>
-        <span th:text="${book.price} + '원'">가격</span>
-    </li>
-</ul>
+    <ul>
+        <li th:each="book : ${books}">
+            <strong th:text="${book.title}">제목</strong>
+            <span> - </span>
+            <span th:text="${book.author}">저자</span>
+            <span> / </span>
+            <span th:text="${book.price} + '원'">가격</span>
+        </li>
+    </ul>
 </body>
 </html>
