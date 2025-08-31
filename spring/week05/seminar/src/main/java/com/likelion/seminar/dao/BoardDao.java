@@ -6,17 +6,20 @@ import com.likelion.seminar.entity.BoardEntity;
 import com.likelion.seminar.repository.BoardRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Iterator;
 import java.util.Optional;
 
+@Repository
 public class BoardDao {
     private static final Logger logger = LoggerFactory.getLogger(BoardDao.class);
     private final BoardRepository boardRepository;
 
-    public BoardDao(BoardRepository boardRepository) {
+    public BoardDao(@Autowired BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
     }
 
