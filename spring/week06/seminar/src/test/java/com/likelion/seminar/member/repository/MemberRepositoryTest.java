@@ -48,7 +48,7 @@ class MemberRepositoryTest {
                 .fetch();
 
 
-        for (Member member : memberList){
+        for (Member member : memberList) {
             System.out.println("---------------");
             System.out.println("Member Id : " + member.getId());
             System.out.println("Member Username : " + member.getUsername());
@@ -64,10 +64,32 @@ class MemberRepositoryTest {
 
         // 실습 2. 평균 나이 계산
         Double avgAge = query.select(qMember.age.avg())
-                        .from(qMember)
-                        .fetchOne();
-        
+                .from(qMember)
+                .fetchOne();
+
         System.out.println("Member avgAge : " + avgAge);
     }
+
+    @Test
+    void queryDslTest03() {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QMember qMember = QMember.member;
+
+        // 실습 3. 이름에 "민"이 포함되고, 나이가 25 이상인 회원 조회, 나이 내림차순
+        List<Member> memberList = query.selectFrom(qMember)
+                .where(qMember.username.contains("민")
+                        .and(qMember.age.goe(25)))
+                .orderBy(qMember.age.desc())
+                .fetch();
+
+        for (Member member : memberList) {
+            System.out.println("---------------");
+            System.out.println("Member Id : " + member.getId());
+            System.out.println("Member Username : " + member.getUsername());
+            System.out.println("Member Age : " + member.getAge());
+            System.out.println("---------------");
+        }
+    }
+
 
 }
