@@ -21,6 +21,7 @@ public class ProductService {
 
     // 2. JPQL -> 가격이 2000원 이하이고 재고가 많은 상품 5개 조회
     public List<Product> getCheapAndStockedTop5Products() {
-        return productRepository.findCheapAndStockedTop5();
+        int price = 2000;
+        return productRepository.findCheapAndStockedTop5(price);
     }
 }
