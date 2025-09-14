@@ -3,6 +3,9 @@ package com.likelion.seminar_hw.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -21,6 +24,14 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Board> boards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Comment> comments = new ArrayList<>();
 
 
 }

@@ -22,4 +22,12 @@ public class Board {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
+    private List<Comment> comments = new ArrayList<>();
 }
