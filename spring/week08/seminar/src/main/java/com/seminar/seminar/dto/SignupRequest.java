@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class SignupRequest {
 
     @NotBlank(message = "아이디는 공백일 수 없습니다.")
-    private String id;
+    private String username;
 
     @NotBlank(message = "이메일은 공백일 수 없습니다.")
     @Email(message = "이메일 형식이 올바르지 않습니다.")
