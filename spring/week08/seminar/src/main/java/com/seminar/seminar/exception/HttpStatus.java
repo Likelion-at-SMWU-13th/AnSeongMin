@@ -7,6 +7,8 @@ public enum HttpStatus { // enum은 상수처럼 쓰는 객체
     UNAUTHORIZED(401, "Unauthorized"),
     FORBIDDEN(403, "Forbidden"),
     NOT_FOUND(404, "Not Found"),
+    CONFLICT(409, "Conflict"),
+    GONE(410, "Gone"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
     SERVICE_UNAVAILABLE(503, "Service Unavailable");
 
