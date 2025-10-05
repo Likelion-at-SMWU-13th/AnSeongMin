@@ -1,6 +1,7 @@
 package org.example.seminar.config;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.example.seminar.filter.CustomLogoutFilter;
 import org.example.seminar.filter.JWTFilter;
 import org.example.seminar.filter.LoginFilter;
 import org.example.seminar.repository.RefreshRepository;
@@ -16,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
@@ -100,6 +102,9 @@ public class SecurityConfig {
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http
+                .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
 
         return http.build();
     }
