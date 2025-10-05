@@ -5,6 +5,8 @@ import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.seminar.entity.RefreshEntity;
+import org.example.seminar.repository.RefreshRepository;
 import org.example.seminar.util.CookieUtil;
 import org.example.seminar.util.JWTUtil;
 import org.springframework.http.HttpStatus;
@@ -12,13 +14,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 @RestController
 public class ReissueController {
 
     private final JWTUtil jwtUtil;
+    private final RefreshRepository refreshRepository;
 
-    public ReissueController(JWTUtil jwtUtil) {
+    public ReissueController(JWTUtil jwtUtil, RefreshRepository refreshRepository) {
         this.jwtUtil = jwtUtil;
+        this.refreshRepository = refreshRepository;
+    }
+
+    // Refresh 토큰 저장하는 인스턴스 메소드
+    private void addRefreshEntity(String username, String refresh, Long expiredMs) {
+        Date date = new Date(System.currentTimeMillis() + expiredMs);
+
+        RefreshEntity refreshEntity = new RefreshEntity();
+        refreshEntity.setUsername(username);
+        refreshEntity.setRefresh(refresh);
+        refreshEntity.setExpiration(date.toString());
+
+        refreshRepository.save(refreshEntity);
     }
 
     @PostMapping("/reissue")
@@ -56,6 +74,10 @@ public class ReissueController {
         // 새로운 access/refresh 토큰 만들고
         String newAccess = jwtUtil.createJwt("access", username, role, 600000L);
         String newRefresh = jwtUtil.createJwt("refresh", username, role, 86400000L);
+
+        // (토큰 재발급 시,) 기존 refresh 삭제 후, 새로운 refresh 저장
+        refreshRepository.deleteByRefresh(refresh);
+        addRefreshEntity(username, newRefresh, 86400000L);
 
         // 헤더/쿠키에 추가
         response.setHeader("access", newAccess);
