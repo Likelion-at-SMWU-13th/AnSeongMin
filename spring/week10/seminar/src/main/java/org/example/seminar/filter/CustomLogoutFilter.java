@@ -1,16 +1,15 @@
 package org.example.seminar.filter;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.seminar.repository.RefreshRepository;
 import org.example.seminar.util.JWTUtil;
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
@@ -30,7 +29,13 @@ public class CustomLogoutFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
 
-        // /logout 경로로의 POST 요청인지 확인
+        doFilter((HttpServletRequest) request, (HttpServletResponse) response, filterChain);
+    }
+
+    private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws IOException, ServletException {
+
+        // /logout 경로로의 POST요청인지 확인
         String requestUri = request.getRequestURI();
         if (!requestUri.matches("^\\/logout$")) {
 
@@ -50,12 +55,14 @@ public class CustomLogoutFilter extends GenericFilterBean {
         for (Cookie cookie : cookies) {
 
             if (cookie.getName().equals("refresh")) {
+
                 refresh = cookie.getValue();
             }
         }
 
         // refresh 토큰이 null인지 체크
         if (refresh == null) {
+
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -63,9 +70,9 @@ public class CustomLogoutFilter extends GenericFilterBean {
         // 토큰 만료되었는지 체크
         try {
             jwtUtil.isExpired(refresh);
-        } catch (ExpiredException e) {
+        } catch (ExpiredJwtException e) {
 
-            // response status code
+            //response status code
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -73,7 +80,8 @@ public class CustomLogoutFilter extends GenericFilterBean {
         // 토큰이 refresh인지 확인
         String category = jwtUtil.getCategory(refresh);
         if (!category.equals("refresh")) {
-            // response status code
+
+            //response status code
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -82,17 +90,17 @@ public class CustomLogoutFilter extends GenericFilterBean {
         Boolean isExist = refreshRepository.existsByRefresh(refresh);
         if (!isExist) {
 
-            // response status code
+            //response status code
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        // 로그아웃 진행
-        // Refresh 토큰 DB에서 제거
+        //로그아웃 진행
+        //Refresh 토큰 DB에서 제거
         refreshRepository.deleteByRefresh(refresh);
 
-        // Refresh 토큰 Cookie 값 0
-        Cookie cookie = new Cookie("refresh", null); // refresh 쿠키 초기화
+        //Refresh 토큰 Cookie 값 0
+        Cookie cookie = new Cookie("refresh", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
 
