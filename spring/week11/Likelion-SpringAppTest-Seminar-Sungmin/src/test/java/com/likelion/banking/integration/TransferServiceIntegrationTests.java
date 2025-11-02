@@ -1,6 +1,7 @@
 package com.likelion.banking.integration;
 
 import com.likelion.banking.domain.Account;
+import com.likelion.banking.exception.AccountNotFoundException;
 import com.likelion.banking.repository.AccountRepository;
 import com.likelion.banking.service.TransferService;
 import org.junit.jupiter.api.DisplayName;
@@ -8,10 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.BDDMockito.*;
 
 /**
@@ -27,9 +31,10 @@ import static org.mockito.BDDMockito.*;
  * - @Transactional 등 스프링 기능이 정상 작동하는지 확인
  */
 @SpringBootTest
+@Transactional
 class TransferServiceIntegrationTests {
 
-    @MockBean
+    @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
@@ -70,4 +75,44 @@ class TransferServiceIntegrationTests {
      * 이 테스트는 작성하지 않아도 됩니다.
      * 대신 전체 테스트 실행 시간을 비교해보세요!
      */
+
+    // 스프링 11주차 과제 -> 통합 테스트 예외 플로우 구현하기
+    // 발신인 계좌를 찾을 수 없는 경우
+    @Test
+    @DisplayName("통합 테스트: 발신인 계좌를 찾을 수 없는 경우 예외가 발생한다.")
+    void transferMoneySenderNotFound() {
+        // given
+        Long invalidSenderId = 999L;
+        Account receiver = new Account(2L, "Jane", new BigDecimal(1000));
+
+        // when & then
+        assertThatThrownBy(() ->
+                transferService.transferMoney(invalidSenderId, receiver.getId(), new BigDecimal(100))
+        )       .isInstanceOf(AccountNotFoundException.class)
+                .hasMessageContaining("Sender account not found");
+    }
+
+
+    // 수취인 계좌를 찾을 수 없는 경우
+    @Test
+    @DisplayName("통합 테스트: 수취인 계좌를 찾을 수 없는 경우 트랜잭션 롤백이 발생한다.")
+    void transferMoneyReceiverNotFound() {
+        // given
+        Account sender = new Account(1L, "John", new BigDecimal(1000));
+        Account receiver = new Account(2L, "Jane", new BigDecimal(1000));
+
+        // when
+        assertThatThrownBy(() ->
+                transferService.transferMoney(sender.getId(), 999L, new BigDecimal(100))
+        )       .isInstanceOf(AccountNotFoundException.class)
+                .hasMessageContaining("Receiver account not found");
+
+        // then
+        assertThat(sender.getAmount()).isEqualTo(new BigDecimal(1000));
+
+    }
+
+
+
+
 }

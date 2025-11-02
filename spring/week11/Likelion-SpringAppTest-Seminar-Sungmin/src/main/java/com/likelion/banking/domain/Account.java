@@ -1,14 +1,24 @@
 package com.likelion.banking.domain;
 
+import jakarta.persistence.*;
+
+import javax.annotation.processing.Generated;
 import java.math.BigDecimal;
 
 /**
  * 계좌 도메인 모델
  */
+@Entity
 public class Account {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 50)
     private String ownerName;
+
+    @Column(nullable = false)
     private BigDecimal amount;
     
     public Account() {
